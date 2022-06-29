@@ -2,21 +2,6 @@
 
 version: "3"
 services:
-  maconso:
-    build: maConso
-    depends_on:
-      - database
-    restart: always
-    volumes:
-      - ./secrets:/usr/src/app/secrets
-    environment:
-      - INFLUXDB_TOKEN=HUYGFgfTYGHCGFdgFCXGcghDHGvfyuJVhjJHcY-ECUSSrArUXeNP_d9NFkpC-GIj0kx7fsOWt4FRaGZ3r4ZHcNw== # A changer
-      - INFLUXDB_URL=http://database:8086
-      - INFLUXDB_ORG=maconso
-      - INFLUXDB_BUCKET=maconso
-      - FIRST_RUN_AGE=63072000 # Pour le premier lancement, âge maximum des relevés (défaut: 2ans)
-    networks:
-      - maconso
   database:
     restart: always
     image: influxdb:latest
@@ -46,5 +31,20 @@ services:
       maconso:
     volumes:
       - ./provisioning:/etc/grafana/provisioning
+  maconso:
+    build: maConso
+    depends_on:
+      - database
+    restart: always
+    volumes:
+      - ./secrets:/usr/src/app/secrets
+    environment:
+      - INFLUXDB_TOKEN=HUYGFgfTYGHCGFdgFCXGcghDHGvfyuJVhjJHcY-ECUSSrArUXeNP_d9NFkpC-GIj0kx7fsOWt4FRaGZ3r4ZHcNw== # A changer
+      - INFLUXDB_URL=http://database:8086
+      - INFLUXDB_ORG=maconso
+      - INFLUXDB_BUCKET=maconso
+      - FIRST_RUN_AGE=2 # Pour le premier lancement, âge maximum des relevés (défaut: 2ans)
+    networks:
+      - maconso
 networks:
   maconso:
