@@ -1,9 +1,9 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "types": [
-            "@types/node"
-        ]
-    }
+  "compilerOptions": {
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "types": ["@types/node"]
+  }
 }
